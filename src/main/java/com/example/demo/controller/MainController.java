@@ -18,12 +18,14 @@ public class MainController {
     @RequestMapping("/checkuser")
     public String CheckUser(String uid, String upass, Model model) {
         String result = "fail";
-        if (uid.equals("aa")&&upass.equals("123")) {
+        int validate = jdbc.queryForObject("select count(*) from users where uname=? and upass = ?",Integer.class,new Object[]{uid,upass});
+        if (validate == 1) {
             result = "success";
         }
-        result = jdbc.queryForObject("select @@version", String.class);
+        String ver = jdbc.queryForObject("select @@version", String.class);
         model.addAttribute("result", result);
         model.addAttribute("uid", uid);
+        model.addAttribute("ver", ver);
         return "info";
     }
     
