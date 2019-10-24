@@ -20,9 +20,10 @@ public class UserController {
     @RequestMapping("/adduser")
     public String addUser(String uname, String upass, Model model) {
         String msg = "fail";
-        int i = jdbc.update("insert into users values(?,?)", new Object[]{uname,upass} );
+        int i = jdbc.update("insert into users values(null,?,?)", new Object[]{uname,upass} );
         if(i>0) {
             msg = "success";
+            return "default";
         }
         model.addAttribute("result", msg);
         return "info";

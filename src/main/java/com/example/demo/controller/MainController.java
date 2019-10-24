@@ -21,12 +21,14 @@ public class MainController {
         int validate = jdbc.queryForObject("select count(*) from users where uname=? and upass = ?",Integer.class,new Object[]{uid,upass});
         if (validate == 1) {
             result = "success";
+        } else {
+            return "relogin";
         }
         String ver = jdbc.queryForObject("select @@version", String.class);
         model.addAttribute("result", result);
         model.addAttribute("uid", uid);
         model.addAttribute("ver", ver);
-        return "info";
+        return "default";
     }
     
 }
