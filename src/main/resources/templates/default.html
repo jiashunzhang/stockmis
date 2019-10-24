@@ -1,0 +1,18 @@
+<html>
+<head></head>
+
+<body>
+欢迎<a th:text="${uid}"></a>
+<hr>
+添加新用户:
+<form name="form1" action="adduser">
+<table border="0">
+    <tr><td>用户名:</td><td><input  name="uname"></td></tr>
+    <tr><td>密码：</td><td><input name="upass" type="password"></td></tr>
+    <tr><td><input type="submit"></td><td><input type="reset"></td></tr>
+</table>
+</form>
+<hr>
+</body>
+
+</html>
