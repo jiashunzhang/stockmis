@@ -1,0 +1,15 @@
+<html>
+    <body>
+        <h1>添加商品</h1>
+        <hr>
+        <form name="form1">
+            <table>
+                <tr><td>商品名称</td><td><input name="stockname"></td></tr>
+                <tr><td>商品类别</td><td><select name="stocktype">
+                    <option th:each="stocktype:${stockTypes}" th:value="${stocktype.id}" th:text="${stocktype.type_name}"></option> 
+                </select></td></tr>
+            </table>
+        </form>
+    </body>
+
+</html>

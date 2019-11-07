@@ -1,10 +1,15 @@
 package com.example.demo.controller;
 
+import com.example.demo.model.StockType;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.*;
 
 /**
  * StockController
@@ -35,6 +40,12 @@ public class StockController {
             model.addAttribute("result", "添加失败！");            
         }
         return "info";
+    }
+    @RequestMapping("/addstock.html")
+    public String addStockHtml(Model model) {
+        List<StockType> stockTypes = jdbc.query("select * from stock_type ", new BeanPropertyRowMapper<StockType>(StockType.class));
+        model.addAttribute("stockTypes", stockTypes);
+        return "addstock";
     }
     
 }
