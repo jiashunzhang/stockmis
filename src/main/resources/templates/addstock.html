@@ -2,12 +2,14 @@
     <body>
         <h1>添加商品</h1>
         <hr>
-        <form name="form1">
+        <form name="form1" action="addstock">
             <table>
                 <tr><td>商品名称</td><td><input name="stockname"></td></tr>
                 <tr><td>商品类别</td><td><select name="stocktype">
+                    <option value="0" selected="selected">请选择商品类型</option>
                     <option th:each="stocktype:${stockTypes}" th:value="${stocktype.id}" th:text="${stocktype.type_name}"></option> 
                 </select></td></tr>
+                <tr><td><input type="submit"></td><td><input type="reset"></td></tr>
             </table>
         </form>
     </body>

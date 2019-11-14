@@ -21,8 +21,14 @@ public class StockController {
     JdbcTemplate jdbc;
 
     @RequestMapping("/addstock")
-    public String addStock(Model model) {
-        model.addAttribute("result", "this is add stock");
+    public String addStock(String stockname, String stocktype, Model model) {
+        int i = jdbc.update("insert into goods values(null,?,?)", new Object[]{stockname, stocktype});
+        if (i>0) {
+            model.addAttribute("result", "ok");
+        } else {
+            model.addAttribute("result", "failed");
+        }
+
         return "info";
     }
     @RequestMapping("/updatestock")
