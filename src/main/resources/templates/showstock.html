@@ -1,0 +1,18 @@
+<html>
+<body>
+
+<table>
+    <tr><th>商品名称</th><th>商品类别</th><th>商品数量</th></tr>
+    <tr th:each="i:${info}">
+        <td th:text="${i.good_name}"></td>
+        <td th:text="${i.type_name}"></td>
+        <td th:text="${i.count}"></td>
+        <td><a th:href="@{update(good_name=${i.good_name})}">修改库存</a></td>
+    </tr>
+
+</table>
+
+
+
+</body>
+</html>

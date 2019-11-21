@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.model.StockInfo;
 import com.example.demo.model.StockType;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,7 @@ public class StockController {
     @RequestMapping("/addstock")
     public String addStock(String stockname, String stocktype, Model model) {
         int i = jdbc.update("insert into goods values(null,?,?)", new Object[]{stockname, stocktype});
+        int j = jdbc.update("insert into stock_info values(null,?,0)", stockname);
         if (i>0) {
             model.addAttribute("result", "ok");
         } else {
@@ -31,6 +33,16 @@ public class StockController {
 
         return "info";
     }
+
+    @RequestMapping("/showstock.html")
+    public String showStock(Model model) {
+        List<StockInfo> info = jdbc.query("select goods.good_name, stock_type.type_name, stock_info.count from goods, stock_type, stock_info where goods.good_type = stock_type.id and goods.good_name = stock_info.good_name ", new BeanPropertyRowMapper<StockInfo>(StockInfo.class));
+        model.addAttribute("info", info);
+
+        return "showstock";
+    }
+
+
     @RequestMapping("/updatestock")
     public String updateStock(Model model) {
         model.addAttribute("result", "this is update stock");
