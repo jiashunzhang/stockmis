@@ -42,10 +42,22 @@ public class StockController {
         return "showstock";
     }
 
+    @RequestMapping("/update")
+    public String update( String aa, Model model) {
+        int count = jdbc.queryForObject("select count from stock_info where good_name=?", Integer.class , aa);
+        model.addAttribute("count", count);
+        model.addAttribute("name", aa);
+        return "updatestock";
+    }
 
     @RequestMapping("/updatestock")
-    public String updateStock(Model model) {
-        model.addAttribute("result", "this is update stock");
+    public String updateStock(String goodname, String count, Model model) {
+        int i = jdbc.update("update stock_info set count = ? where good_name=?", new Object[]{count,goodname});
+        if(i>0) {
+            model.addAttribute("result", "ok");
+        } else {
+            model.addAttribute("result", "fail");
+        }
         return "info";
     }
 

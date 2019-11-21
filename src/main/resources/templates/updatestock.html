@@ -1,0 +1,21 @@
+<html>
+
+<body>
+    <form name="form1" action="updatestock">
+        <table>
+            <tr><td>商品名称</td><td><p th:text="${name}"></p></td></tr>
+            <input type="hidden" th:value="${name}" name="goodname">
+ <!--<tr><td>商品名称</td><td><input th:value="${name}" disabled="disabled"></td></tr>--> 
+            <tr><td>库存数量</td><td><input th:value="${count}" name="count"></td></tr>
+            <tr><td><input type="submit"></td><td><input type="reset"></td></tr>
+        </table>
+
+
+
+
+    </form>
+
+
+</body>
+
+</html>
