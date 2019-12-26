@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 /**
  * StockController
  */
@@ -22,9 +25,12 @@ public class StockController {
     JdbcTemplate jdbc;
 
     @RequestMapping("/addstock")
-    public String addStock(String stockname, String stocktype, Model model) {
-        int i = jdbc.update("insert into goods values(null,?,?)", new Object[]{stockname, stocktype});
+    public String addStock(String stockname, String stocktype, Model model, HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        String id = (String)session.getAttribute("uid");
+        int i = jdbc.update("insert into goods values(null,?,?,?)", new Object[]{stockname, stocktype,id});
         int j = jdbc.update("insert into stock_info values(null,?,0)", stockname);
+        
         if (i>0) {
             model.addAttribute("result", "ok");
         } else {
