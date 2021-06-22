@@ -29,7 +29,7 @@ public class StockController {
         HttpSession session = request.getSession();
         String id = (String)session.getAttribute("uid");
         int i = jdbc.update("insert into goods values(null,?,?,?)", new Object[]{stockname, stocktype,id});
-        int j = jdbc.update("insert into stock_info values(null,?,0)", stockname);
+        //int j = jdbc.update("insert into stock_info values(null,?,0)", stockname);
         
         if (i>0) {
             model.addAttribute("result", "ok");
