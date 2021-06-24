@@ -30,10 +30,10 @@ public class MainController {
         }
         HttpSession session = request.getSession();
         session.setAttribute("uid", uid);
-        String ver = jdbc.queryForObject("select @@version", String.class);
+        //String ver = jdbc.queryForObject("select @@version", String.class);
         model.addAttribute("result", result);
         model.addAttribute("uid", uid);
-        model.addAttribute("ver", ver);
+        //model.addAttribute("ver", ver);
         return "default";
     }
     
